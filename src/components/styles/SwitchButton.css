@@ -1,7 +1,8 @@
 .color-switch {
-    font-weight: 600;
     float: right;
+    font-weight: 600;
     text-decoration: none;
+    outline: none;
 }
 
 .lnr {
