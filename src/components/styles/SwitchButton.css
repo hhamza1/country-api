@@ -1,0 +1,12 @@
+.color-switch {
+    font-weight: 600;
+    float: right;
+    text-decoration: none;
+}
+
+.lnr {
+    padding-right: 10px;
+    vertical-align: baseline;
+    font-weight: 600;
+    font-size: 90%;
+}
