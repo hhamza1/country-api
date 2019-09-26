@@ -1,24 +1,36 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './styles/Filter.css';
 
 
-const Filter = () => {
-    return (
-            <div className="filter dropdown dropdown">
-                <div tabIndex="0">Filter by Region</div>
+class Filter extends Component {
+    constructor() {
+        super();
+        this.state = {
+            dropdownElement : "Filter by Region"
+        };
+    }
+
+    render() {
+        const {dropdownElement} = this.state;
+        const selectFilter = (event) => {
+            this.setState({dropdownElement : event.target.id});
+        }
+
+        return (
+            <div className="filter dropdown">
+                <div tabIndex="0">{dropdownElement}</div>
                 <div tabIndex="-1" className="downarrow"></div>
                 <div>
                     <ul>
-                        <li className="filter-child">Africa</li>
-                        <li className="filter-child">America</li>
-                        <li className="filter-child">Asia</li>
-                        <li className="filter-child">Europe</li>
-                        <li className="filter-child">Oceania</li>
+                        <li id="Africa" className="filter-child" onClick={selectFilter} >Africa</li>
+                        <li id="America" className="filter-child" onClick={selectFilter} >America</li>
+                        <li id="Asia" className="filter-child" onClick={selectFilter} >Asia</li>
+                        <li id="Europe" className="filter-child" onClick={selectFilter} >Europe</li>
+                        <li id="Oceania" className="filter-child" onClick={selectFilter} >Oceania</li>
                     </ul>
                 </div>
-            </div>
-    );
+        </div>);
+    }
 }
-
 
 export default Filter;
