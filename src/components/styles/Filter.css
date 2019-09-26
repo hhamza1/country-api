@@ -56,10 +56,11 @@
 }
 
 .filter > .downarrow:focus ~ *:last-child,
-.dropdown:focus              > *:last-child,
-.dropdown > *:focus          ~ *:last-child 
+.dropdown:focus > *:last-child,
+.dropdown > *:focus ~ *:last-child 
 .filter > *:last-child:focus-within,
-.dropdown > *:last-child:focus-within {
+.dropdown > *:last-child:focus-within
+{
   display: block;
   margin-top: 2px;
   border:0;
@@ -69,16 +70,14 @@
   transition: 0.2s;
 }
 
-.downarrow:focus {
+.dropdown:not(.sticky) > *:not(:last-child):focus,
+.downarrow:focus,
+.dropdown:focus  {
     pointer-events: none;
 }
 
 .filter-child {
     list-style-type: none;
-    padding: 5px 0;
+    padding: 7px 0;
     padding-left: 15px;
-}
-
-.filter-child:focus {
-    background-color: hsl(0, 0%, 78%) !important;
 }
