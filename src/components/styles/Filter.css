@@ -1,0 +1,84 @@
+.filter, .dropdown{
+    position: relative;
+    display: inline-block;
+}
+
+.filter {
+    border:0 ;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 1px 2px hsl(0, 0%, 78%);
+    margin: 20px 30px 20px 20px;
+    padding: 15px;
+    width: 70%;
+    max-width: 200px;
+}
+
+.filter > .downarrow, .dropdown > .downarrow {
+    display: block;     
+    position: absolute; 
+    top: 0;   
+    right: 0; 
+    width: 20px;
+    cursor: pointer; 
+  }
+
+  .downarrow:empty::before {
+    content: '⌵';
+  }
+
+  .downarrow::before, .downarrow > *:only-child {
+    text-align: center; 
+    position: relative;
+    top: 15px;           
+    transform: translateY(-50%);
+  }
+
+  .filter > *:first-child {
+    width: 100%;
+    box-sizing: border-box; /* so 100% includes border & padding */
+    display: inline-block;
+  }
+
+  .dropdown > *:last-child,
+  .filter > *:last-child {
+  display: block;  
+  position: absolute;     /* outside document flow */
+  left: 0;          /* Left side of popup = left side of parent */
+  top: 100%;        /* Top of popup = 100% below top of parent */
+  background-color: #fff; /* white background */
+  box-shadow: 0 1px 2px hsl(0, 0%, 78%);
+  z-index: 9999;          /* draw on top of everything else */
+  min-width: 100%;        /* >= 100% as wide as its container */
+  box-sizing: border-box; /* width includes border & padding */
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.filter > .downarrow:focus ~ *:last-child,
+.dropdown:focus              > *:last-child,
+.dropdown > *:focus          ~ *:last-child 
+.filter > *:last-child:focus-within,
+.dropdown > *:last-child:focus-within {
+  display: block;
+  margin-top: 2px;
+  border:0;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px hsl(0, 0%, 78%);
+  opacity: 1;
+  transition: 0.2s;
+}
+
+.downarrow:focus {
+    pointer-events: none;
+}
+
+.filter-child {
+    list-style-type: none;
+    padding: 5px 0;
+    padding-left: 15px;
+}
+
+.filter-child:focus {
+    background-color: hsl(0, 0%, 78%) !important;
+}
