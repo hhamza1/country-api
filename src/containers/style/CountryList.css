@@ -1,0 +1,15 @@
+.country-list {
+    display: grid;
+    grid-auto-flow: row;
+} 
+
+
+
+
+
+@media (min-width: 1025px) {
+    .country-list {
+        display: grid;
+        grid-template-columns: repeat(4,1fr) ;
+    }
+}
