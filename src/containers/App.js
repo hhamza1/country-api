@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import * as axios from 'axios';
 import Header from './Header';
 import SearchInput from '../components/SearchInput';
+import Pagination from '../components/Pagination';
 import CountryList from '../containers/CountryList';
 import Filter from '../components/Filter';
 import './style/App.css';
@@ -12,6 +13,8 @@ class App extends Component {
     this.state = {
       countries: [],
       isLoaded: false,
+      currentPage: 1,
+      countryPerPage: 12,
       selecteCountry: ''
     };
   }
@@ -27,18 +30,28 @@ class App extends Component {
   }
 
 
+  setCurrentPage = (number) => {
+      this.setState({currentPage:number});
+  };
+
+
 
 
   render() {
-    const {countries, isLoaded} = this.state;
+    const {countries, isLoaded, currentPage, countryPerPage } = this.state;
+    const indexOfLastCountry = currentPage * countryPerPage;
+    const indexOfFirstCountry = indexOfLastCountry - countryPerPage;
+    const getCurrentCountry = countries.slice(indexOfFirstCountry, indexOfLastCountry);
+    const paginate = (pageNumber) => this.setCurrentPage(pageNumber);
     return (
       <div className="App">
         <Header />
         <SearchInput />
         <Filter />
         {
-          !isLoaded ? <h1>Loading ...</h1> : <CountryList countries={countries} />
+          !isLoaded ? <h1>Loading ...</h1> : <CountryList countries={getCurrentCountry} />
         }
+        <Pagination countryPerPage={countryPerPage} totalCountries={countries.length} paginate={paginate}/>
       </div>
     );
   }
