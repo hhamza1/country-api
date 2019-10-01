@@ -3,7 +3,7 @@ import './styles/Country.css';
 
 
 
-const Country = () => {
+const Country = ({name}) => {
     return (
         <div className="country">
             <div className="country_flag">
@@ -11,10 +11,10 @@ const Country = () => {
             </div>
             <div className="country_info">
                 <ul>
-                    <li>Germany</li>
-                    <li>Population: </li>
-                    <li>Region: </li>
-                    <li>Capital: </li>
+                    <li className="country_name">{name}</li>
+                    <li className="country_details">Population: </li>
+                    <li className="country_details">Region: </li>
+                    <li className="country_details">Capital: </li>
                 </ul>
             </div>
         </div>
