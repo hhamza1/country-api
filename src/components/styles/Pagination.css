@@ -1,0 +1,18 @@
+.pagination {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.pagination li{
+    display: inline-block;
+    padding: 5px;
+
+}
+
+.page-link {
+    text-decoration: none;
+}
+
+.page-link:focus {
+    text-decoration: underline;
+}
