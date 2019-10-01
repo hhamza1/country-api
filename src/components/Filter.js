@@ -18,7 +18,7 @@ class Filter extends Component {
 
         return (
             <div className="filter dropdown">
-                <div tabIndex="0">{dropdownElement}</div>
+                <div className="dropdown" tabIndex="0">{dropdownElement}</div>
                 <div tabIndex="-1" className="downarrow"></div>
                 <div>
                     <ul>
