@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import * as axios from 'axios';
 import Header from './Header';
 import SearchInput from '../components/SearchInput';
 import CountryList from '../containers/CountryList';
@@ -10,29 +11,34 @@ class App extends Component {
     super(props);
     this.state = {
       countries: [],
+      isLoaded: false,
       selecteCountry: ''
     };
   }
 
   componentDidMount() {
-    fetch('https://restcountries.eu/rest/v2/all')
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({countries : result})
-        });
+    axios({
+      method: 'get',
+      url: 'https://restcountries.eu/rest/v2/all'
+    })
+      .then(res => {
+          this.setState({countries : res.data, isLoaded:true});
+    });
   }
 
 
 
+
   render() {
-    const {countries} = this.state;
+    const {countries, isLoaded} = this.state;
     return (
       <div className="App">
         <Header />
         <SearchInput />
         <Filter />
-        <CountryList countries={countries} />
+        {
+          !isLoaded ? <h1>Loading ...</h1> : <CountryList countries={countries} />
+        }
       </div>
     );
   }
