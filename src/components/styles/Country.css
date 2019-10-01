@@ -1,16 +1,3 @@
-li {
-    font-size: 16px;
-    font-weight: 600;
-    list-style-type: none;
-    padding-bottom: 5px;
-}
-
-li:nth-child(1) {
-    font-size: 24px;
-    font-weight: 700;
-    padding-bottom: 10px;
-}
-
 .country {
     border: 0;
     background: hsl(0, 0%, 100%);
@@ -33,4 +20,21 @@ li:nth-child(1) {
 
 .country_info {
     padding: 30px;
+}
+
+.country_info li {
+    list-style-type: none;
+    padding-bottom: 5px;
+}
+
+.country_name{
+    font-size: 24px;
+    font-weight: 700;
+    padding-bottom: 10px;
+}
+
+
+.country_details {
+    font-size: 16px;
+    font-weight: 600; 
 }
