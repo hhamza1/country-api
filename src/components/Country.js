@@ -3,18 +3,18 @@ import './styles/Country.css';
 
 
 
-const Country = ({name}) => {
+const Country = ({name, flag, capital, population, region}) => {
     return (
         <div className="country">
             <div className="country_flag">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/1280px-Flag_of_Germany.svg.png" alt="Germany" />
+                <img src={flag} alt={name} />
             </div>
             <div className="country_info">
                 <ul>
                     <li className="country_name">{name}</li>
-                    <li className="country_details">Population: </li>
-                    <li className="country_details">Region: </li>
-                    <li className="country_details">Capital: </li>
+                    <li className="country_details">Population: {population}</li>
+                    <li className="country_details">Region: {region}</li>
+                    <li className="country_details">Capital: {capital}</li>
                 </ul>
             </div>
         </div>
