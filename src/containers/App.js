@@ -13,9 +13,12 @@ class App extends Component {
     this.state = {
       countries: [],
       isLoaded: false,
+      hidePagination: false,
       currentPage: 1,
       countryPerPage: 12,
-      selecteCountry: ''
+      selectedCountry: '',
+      searchField:'',
+      filteredRegion: ''
     };
   }
 
@@ -34,24 +37,43 @@ class App extends Component {
       this.setState({currentPage:number});
   };
 
+  setCountry = (e) => {
+    this.setState({searchField: e.target.value});
+  }
+
+  filterRegion = (e) => {
+    this.setState({filteredRegion: e.target.id});
+  }
+
 
 
 
   render() {
-    const {countries, isLoaded, currentPage, countryPerPage } = this.state;
+    const {countries, isLoaded, currentPage, countryPerPage, searchField, filteredRegion} = this.state;
     const indexOfLastCountry = currentPage * countryPerPage;
     const indexOfFirstCountry = indexOfLastCountry - countryPerPage;
-    const getCurrentCountry = countries.slice(indexOfFirstCountry, indexOfLastCountry);
+    const getCurrentCountries = countries.slice(indexOfFirstCountry, indexOfLastCountry);
+    const getCurrentCountry = countries.filter(
+      country => {
+        return country.name.toLowerCase().includes(searchField.toLowerCase());
+      }
+    )
+
+    
     const paginate = (pageNumber) => this.setCurrentPage(pageNumber);
+    const searchCountry = (e) => this.setCountry(e);
+    const searchRegion = (e) => this.filterRegion(e);
+
+
     return (
       <div className="App">
         <Header />
-        <SearchInput />
-        <Filter />
+        <SearchInput searchCountry={searchCountry}/>
+        <Filter currentRegion={filteredRegion} selectRegion={searchRegion}/>
         {
-          !isLoaded ? <h1>Loading ...</h1> : <CountryList countries={getCurrentCountry} />
+          !isLoaded ? <h1>Loading ...</h1> : <CountryList countries={searchField==='' ? getCurrentCountries : getCurrentCountry }/> 
         }
-        <Pagination countryPerPage={countryPerPage} totalCountries={countries.length} paginate={paginate}/>
+        <Pagination countryPerPage={countryPerPage} totalCountries={countries.length} paginate={paginate}/>           
       </div>
     );
   }
