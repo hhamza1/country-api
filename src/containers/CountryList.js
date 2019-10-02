@@ -16,7 +16,7 @@ const CountryList = ({countries}) => {
                             flag={country.flag}
                             capital={country.capital}
                             population={country.population}
-                            region={country.region}  
+                            region={country.region}
                         />
                     )
                 })
