@@ -9,6 +9,7 @@ const Filter = ({selectRegion, currentRegion}) => {
                 <div tabIndex="-1" className="downarrow"></div>
                 <div>
                     <ul>
+                        <li className="filter-child" onClick={selectRegion} >All Regions</li>                        
                         <li id="Africa" className="filter-child" onClick={selectRegion} >Africa</li>
                         <li id="America" className="filter-child" onClick={selectRegion} >America</li>
                         <li id="Asia" className="filter-child" onClick={selectRegion} >Asia</li>
