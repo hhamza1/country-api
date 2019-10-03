@@ -34,7 +34,7 @@ class App extends Component {
 
 
   setCurrentPage = (number) => {
-      this.setState({currentPage:number});
+    this.setState({currentPage:number});
   };
 
   setCountry = (e) => {
@@ -52,12 +52,15 @@ class App extends Component {
     const {countries, isLoaded, currentPage, countryPerPage, searchField, filteredRegion} = this.state;
     const indexOfLastCountry = currentPage * countryPerPage;
     const indexOfFirstCountry = indexOfLastCountry - countryPerPage;
-    const getCurrentCountries = countries.slice(indexOfFirstCountry, indexOfLastCountry);
     const getCurrentCountry = countries.filter(
-      country => {
-        return country.name.toLowerCase().includes(searchField.toLowerCase());
+      country =>{
+                   
+            return country.name.toLowerCase().includes(searchField.toLowerCase()) && country.region.toLowerCase().includes(filteredRegion.toLowerCase());;
       }
-    )
+    );
+
+    const getCurrentCountries = getCurrentCountry.slice(indexOfFirstCountry, indexOfLastCountry);
+
 
     
     const paginate = (pageNumber) => this.setCurrentPage(pageNumber);
@@ -71,7 +74,7 @@ class App extends Component {
         <SearchInput searchCountry={searchCountry}/>
         <Filter currentRegion={filteredRegion} selectRegion={searchRegion}/>
         {
-          !isLoaded ? <h1>Loading ...</h1> : <CountryList countries={searchField==='' ? getCurrentCountries : getCurrentCountry }/> 
+          !isLoaded ? <h1>Loading ...</h1> : <CountryList countries={getCurrentCountries}/> 
         }
         <Pagination countryPerPage={countryPerPage} totalCountries={countries.length} paginate={paginate}/>           
       </div>
