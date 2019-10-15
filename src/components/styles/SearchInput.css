@@ -9,7 +9,7 @@
     top: 38px;
     left: 40px;
     padding-right: 20px;
-
+    pointer-events: none;
 }
 
 
