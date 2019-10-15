@@ -3,11 +3,11 @@ import SwitchButton from '../components/SwitchButton';
 import './style/Header.css';
 
 
-const Header = () => {
+const Header = ({isDark, setToDarkMod}) => {
     return (
-        <div className="header">
+        <div className={isDark === false ? 'header' : 'darkHeader'}>
             <h2 className="heading">Where in the world?</h2>
-            <SwitchButton/>
+            <SwitchButton switchMod={setToDarkMod}/>
         </div>
     );
 }
