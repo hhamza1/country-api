@@ -71,8 +71,10 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <SearchInput searchCountry={searchCountry}/>
-        <Filter currentRegion={filteredRegion} selectRegion={searchRegion}/>
+        <div className="search-filters">
+          <SearchInput searchCountry={searchCountry}/>
+          <Filter currentRegion={filteredRegion} selectRegion={searchRegion}/>
+        </div>
         {
           !isLoaded ? <h1>Loading ...</h1> : <CountryList countries={getCurrentCountries}/> 
         }
