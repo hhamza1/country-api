@@ -14,6 +14,7 @@
     color: hsl(0, 0%, 100%);
     padding: 30px 20px;
     max-width: 100%;
+    transition: 1s;
 }
 
 .heading {
