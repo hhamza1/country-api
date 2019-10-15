@@ -4,7 +4,7 @@ import './style/CountryList.css';
 
 
 
-const CountryList = ({countries}) => {
+const CountryList = ({countries, darkMod}) => {
 
     return(
         <div className="country-list">
@@ -18,6 +18,7 @@ const CountryList = ({countries}) => {
                             capital={country.capital}
                             population={country.population}
                             region={country.region}
+                            darkMod={darkMod}
                         />
                     )
                 })

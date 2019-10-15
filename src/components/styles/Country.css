@@ -5,6 +5,19 @@
     box-shadow: 0 1px 3px hsl(0, 0%, 78%);
 }
 
+
+.darkCountry {
+    background: hsl(209, 23%, 22%);
+    border-radius: 5px;
+    box-shadow: 0 1px 3px hsl(207, 26%, 17%); 
+    transition: 1s ease-in-out;
+}
+
+
+.darkCountry > .country_flag img {
+    box-shadow: 0 1px 3px hsl(207, 26%, 17%); 
+}
+
 .country_flag {
     position: relative;
     padding-bottom: 65%;

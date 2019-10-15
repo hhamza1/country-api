@@ -5,6 +5,11 @@
     outline: none;
 }
 
+.color-switch:active {
+    color: hsl(200, 15%, 8%);
+}
+
+
 .lnr {
     padding-right: 10px;
     vertical-align: baseline;

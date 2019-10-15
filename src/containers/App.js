@@ -84,11 +84,11 @@ class App extends Component {
       <div className={isDark === false ? 'App' : 'darkMod'}>
         <Header darkMod={isDark} setToDarkMod={setToDarkMod}/>
         <div className="search-filters">
-          <SearchInput searchCountry={searchCountry}/>
-          <Filter currentRegion={filteredRegion} selectRegion={searchRegion}/>
+          <SearchInput darkMod={isDark} searchCountry={searchCountry}/>
+          <Filter darkMod={isDark} currentRegion={filteredRegion} selectRegion={searchRegion}/>
         </div>
         {
-          !isLoaded ? <h1>Loading ...</h1> : <CountryList countries={getCurrentCountries}/> 
+          !isLoaded ? <h1>Loading ...</h1> : <CountryList darkMod={isDark} countries={getCurrentCountries}/> 
         }
         <Pagination countryPerPage={countryPerPage} totalCountries={countries.length} paginate={paginate}/>           
       </div>

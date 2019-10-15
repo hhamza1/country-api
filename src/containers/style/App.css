@@ -15,6 +15,10 @@
     transition: 1s;
 }
 
+.darkMod * {
+    color: hsl(0, 0%, 100%) !important;
+}
+
 
 
 

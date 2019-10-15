@@ -11,10 +11,16 @@
     background: hsl(209, 23%, 22%);
     border-radius: 1px;
     box-shadow: 0 1px 3px hsl(207, 26%, 17%);
-    color: hsl(0, 0%, 100%);
+    color: hsl(0, 0%, 100%) !important;
     padding: 30px 20px;
     max-width: 100%;
-    transition: 1s;
+    transition: 1s
+}
+
+
+
+.darkHeader * {
+    color: hsl(0, 0%, 100%) !important;
 }
 
 .heading {

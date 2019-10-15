@@ -2,12 +2,12 @@ import React from 'react';
 import './styles/Filter.css';
 
 
-const Filter = ({selectRegion, currentRegion}) => {
+const Filter = ({selectRegion, currentRegion, darkMod}) => {
         return (
-            <div className="filter dropdown">
+            <div className={darkMod===false ? "filter dropdown" : "filter dropdown darkFilter"} >
                 <div className="dropdown" tabIndex="0">{currentRegion===''? "Filter by Region": currentRegion}</div>
                 <div tabIndex="-1" className="downarrow"></div>
-                <div>
+                <div className="listRegions">
                     <ul>
                         <li className="filter-child" onClick={selectRegion} >All Regions</li>                        
                         <li id="Africa" className="filter-child" onClick={selectRegion} >Africa</li>

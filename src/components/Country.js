@@ -3,9 +3,9 @@ import './styles/Country.css';
 
 
 
-const Country = ({name, flag, capital, population, region}) => {
+const Country = ({name, flag, capital, population, region, darkMod}) => {
     return (
-        <div className="country">
+        <div className={darkMod === false ? "country" : "country darkCountry"}>
             <div className="country_flag">
                 <img src={flag} alt={name} />
             </div>

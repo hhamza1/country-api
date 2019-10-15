@@ -2,11 +2,11 @@ import React from 'react';
 import './styles/SearchInput.css';
 
 
-const SearchInput = ({searchCountry}) => {
+const SearchInput = ({searchCountry, darkMod}) => {
     return (
         <div className="input-group">
             <input 
-            className="search-input" 
+            className={darkMod === false ? "search-input" : "search-input search-input__dark"}
             type="text" 
             name="countrySearch" 
             placeholder="Search for a country"
