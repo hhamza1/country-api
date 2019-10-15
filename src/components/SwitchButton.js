@@ -3,9 +3,9 @@ import 'linearicons';
 import './styles/SwitchButton.css';
 
 
-const SwitchButton = () => {
+const SwitchButton = ({switchMod}) => {
     return (
-            <a className="color-switch" href="#!">
+            <a className="color-switch" href="#!" onClick={switchMod}> 
                 <span className="lnr lnr-moon"></span>
                 Dark Mode
             </a>
