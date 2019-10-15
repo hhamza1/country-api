@@ -13,9 +13,10 @@ class App extends Component {
     this.state = {
       countries: [],
       isLoaded: false,
+      isDark: false,
       hidePagination: false,
       currentPage: 1,
-      countryPerPage: 12,
+      countryPerPage: 24,
       selectedCountry: '',
       searchField:'',
       filteredRegion: ''
@@ -39,17 +40,19 @@ class App extends Component {
 
   setCountry = (e) => {
     this.setState({searchField: e.target.value});
-  }
+  };
 
   filterRegion = (e) => {
     this.setState({filteredRegion: e.target.id});
-  }
+  };
+
+  
 
 
 
 
   render() {
-    const {countries, isLoaded, currentPage, countryPerPage, searchField, filteredRegion} = this.state;
+    const {countries, isLoaded, currentPage, countryPerPage, searchField, filteredRegion, isDark} = this.state;
     const indexOfLastCountry = currentPage * countryPerPage;
     const indexOfFirstCountry = indexOfLastCountry - countryPerPage;
     const getCurrentCountry = countries.filter(
@@ -67,10 +70,19 @@ class App extends Component {
     const searchCountry = (e) => this.setCountry(e);
     const searchRegion = (e) => this.filterRegion(e);
 
+    const setToDarkMod = () => {
+      if(isDark === false){
+        this.setState({isDark : true});
+      }
+      else {
+        this.setState({isDark : false});
+      }
+    };
+
 
     return (
-      <div className="App">
-        <Header />
+      <div className={isDark === false ? 'App' : 'darkMod'}>
+        <Header darkMod={isDark} setToDarkMod={setToDarkMod}/>
         <div className="search-filters">
           <SearchInput searchCountry={searchCountry}/>
           <Filter currentRegion={filteredRegion} selectRegion={searchRegion}/>
