@@ -4,7 +4,6 @@ import './style/Header.css';
 
 
 const Header = ({darkMod, setToDarkMod}) => {
-    console.log(darkMod);
     return (
         <div className={darkMod === false ? 'header' : 'darkHeader'}>
             <h2 className="heading">Where in the world?</h2>
