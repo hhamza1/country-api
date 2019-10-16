@@ -3,18 +3,18 @@ import './styles/Country.css';
 
 
 
-const Country = ({name, flag, capital, population, region, darkMod}) => {
+const Country = (props) => {
     return (
-        <div className={darkMod === false ? "country" : "country darkCountry"}>
+        <div className={props.darkMod === false ? "country" : "country darkCountry"} onClick={() => props.selectedCountry(props.country)}>
             <div className="country_flag">
-                <img src={flag} alt={name} />
+                <img src={props.flag} alt={props.name} />
             </div>
             <div className="country_info">
                 <ul>
-                    <li className="country_name">{name}</li>
-                    <li className="country_details">Population: {population}</li>
-                    <li className="country_details">Region: {region}</li>
-                    <li className="country_details">Capital: {capital}</li>
+                    <li className="country_name">{props.name}</li>
+                    <li className="country_details">Population: {props.population}</li>
+                    <li className="country_details">Region: {props.region}</li>
+                    <li className="country_details">Capital: {props.capital}</li>
                 </ul>
             </div>
         </div>
