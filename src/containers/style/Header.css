@@ -14,7 +14,7 @@
     color: hsl(0, 0%, 100%) !important;
     padding: 30px;
     max-width: 100%;
-    transition: 1s
+    transition: .6s
 }
 
 

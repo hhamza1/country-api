@@ -30,13 +30,13 @@
     padding: 15px 0;
     padding-left: 50px;
     outline: none;
-    transition: 1s;
+    transition: .6s;
 }
 
 .search-input__dark {
     background-color: hsl(209, 23%, 22%);
     box-shadow: 0 1px 3px hsl(207, 26%, 17%);
-    transition: 1s;
+    transition: .6s;
 }
 
 

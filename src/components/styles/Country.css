@@ -10,7 +10,7 @@
     background: hsl(209, 23%, 22%);
     border-radius: 5px;
     box-shadow: 0 1px 3px hsl(207, 26%, 17%); 
-    transition: 1s ease-in-out;
+    transition: .6s ease-in-out;
 }
 
 
