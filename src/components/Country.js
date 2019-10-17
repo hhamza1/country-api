@@ -12,7 +12,7 @@ const Country = (props) => {
             <div className="country_info">
                 <ul>
                     <li className="country_name">{props.name}</li>
-                    <li className="country_details">Population: {props.population}</li>
+                    <li className="country_details">Population: {props.population.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</li>
                     <li className="country_details">Region: {props.region}</li>
                     <li className="country_details">Capital: {props.capital}</li>
                 </ul>
