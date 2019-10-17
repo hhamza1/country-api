@@ -1,0 +1,6 @@
+.selected-country-details {
+    display: grid;
+    grid-auto-flow: row;
+    padding: 30px;
+}
+
