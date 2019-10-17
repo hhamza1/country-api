@@ -6,10 +6,7 @@ import {
 } from 'react-router-dom';
 import * as axios from 'axios';
 import Header from './Header';
-import SearchInput from '../components/SearchInput';
-import Pagination from '../components/Pagination';
-import CountryList from '../containers/CountryList';
-import Filter from '../components/Filter';
+import Home from './Home';
 import './style/App.css';
 import CountryDetails from './CountryDetails';
 
@@ -90,28 +87,24 @@ class App extends Component {
       }
     };
 
-    const Home = () => {
-      return (
-        <div>
-              <div className="search-filters">
-                <SearchInput darkMod={isDark} searchCountry={searchCountry}/>
-                <Filter darkMod={isDark} currentRegion={filteredRegion} selectRegion={searchRegion}/>
-              </div>
-              <CountryList darkMod={isDark} countries={getCurrentCountries} selectedCountry={clickCountry}/>
-              <Pagination countryPerPage={countryPerPage} totalCountries={countries.length} paginate={paginate}/>           
-        </div>
-      );
-    }
-
-
     return (
       <div className={isDark === false ? 'App' : 'darkMod'}>
         <Header darkMod={isDark} setToDarkMod={setToDarkMod}/>
-        
         <Router>
           <Switch>
             <Route exact path="/">
-                <Home />
+                <Home
+                  isDark={isDark}
+                  filteredRegion={filteredRegion}
+                  countryPerPage={countryPerPage}
+                  getCurrentCountries={getCurrentCountries} 
+                  paginate={paginate}
+                  countries={countries}
+                  searchCountry={searchCountry} 
+                  searchRegion={searchRegion} 
+                  clickCountry={clickCountry}
+                  sear
+                  />
             </Route>
             <Route exact path={`/${selectedCountry.name}`}>
                 <CountryDetails selectedCountry={selectedCountry} />
