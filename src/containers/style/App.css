@@ -6,7 +6,6 @@
 
 
 .App {
-    background: hsl(0, 0%, 98%);
     transition: .6s;
 }
 
@@ -18,15 +17,6 @@
 .darkMod * {
     color: hsl(0, 0%, 100%) !important;
 }
-
-
-
-
-
-
-
-
-
 
 
 @media (min-width: 1024px) {
