@@ -51,7 +51,6 @@ class App extends Component {
 
   selectCountry = (e) => {
     this.setState({selectedCountry: e});
-    console.log('Selected Country', this.state.selectedCountry);
   };
   
 
@@ -107,7 +106,7 @@ class App extends Component {
                   />
             </Route>
             <Route exact path={`/${selectedCountry.name}`}>
-                <CountryDetails selectedCountry={selectedCountry} />
+                <CountryDetails isDark={isDark} selectedCountry={selectedCountry} />
             </Route>
           </Switch>
         </Router>
