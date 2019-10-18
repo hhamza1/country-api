@@ -6,12 +6,15 @@
 
 
 .App {
+    overflow: hidden;
     transition: .6s;
 }
 
 .darkMod {
     background: hsl(207, 26%, 17%);
+    height: 100vh;
     transition: .6s;
+
 }
 
 .darkMod * {

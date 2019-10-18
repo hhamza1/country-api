@@ -87,7 +87,7 @@ class App extends Component {
     };
 
     return (
-      <div className={isDark === false ? 'App' : 'darkMod'}>
+      <div isDark={isDark} className={isDark === false ? 'App' : 'darkMod'}>
         <Header darkMod={isDark} setToDarkMod={setToDarkMod}/>
         <Router>
           <Switch>
