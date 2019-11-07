@@ -41,8 +41,14 @@ const CountryDetails = ({isDark, selectedCountry}) => {
                         <ul className="border-country">
                         <strong>Border Countries :&nbsp; </strong>
                             {selectedCountry.borders.map((border, key) => {
-                                return <li key={key} className={isDark === true ? "dark-mod" : ""} >{border}</li>
-                            })}
+                                    if(!border) {
+                                        return <li key={key} className={isDark === true ? "dark-mod" : ""} >NONE</li>
+                                    }
+                                    else {
+                                        return <li key={key} className={isDark === true ? "dark-mod" : ""} >{border}</li>
+                                    }
+                             })
+                            }
                         </ul>
                     </div>
                 </div>
