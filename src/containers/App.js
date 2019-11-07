@@ -34,6 +34,18 @@ class App extends Component {
       .then(res => {
           this.setState({countries : res.data, isLoaded:true});
     });
+
+    if(!this.props.selectedCountry){
+      let country = window.location.href.split("/")[3];
+      console.log(country);
+      axios({
+          method: 'get',
+          url: `https://restcountries.eu/rest/v2/name/${country}`
+      }).then( res => {
+          console.log(res.data[0]);
+          this.setState({selectedCountry : res.data[0]});
+      });
+}
   }
 
 
@@ -87,7 +99,7 @@ class App extends Component {
     };
 
     return (
-      <div isDark={isDark} className={isDark === false ? 'App' : 'darkMod'}>
+      <div className={isDark === false ? 'App' : 'darkMod'}>
         <Header darkMod={isDark} setToDarkMod={setToDarkMod}/>
         <Router>
           <Switch>

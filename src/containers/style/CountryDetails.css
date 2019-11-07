@@ -20,6 +20,8 @@
     max-width: 100%;
     margin: 20px 0;
     border-radius: 5px;
+    border: 0;
+    box-shadow: 0 1px 3px hsl(0, 0%, 52%);
 }
 
 .selected-details h1{

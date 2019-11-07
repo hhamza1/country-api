@@ -4,6 +4,6 @@ import './index.css';
 import App from './containers/App';
 
 
-render(<App />, document.getElementById('root'));
+render(<App/>, document.getElementById('root'));
 
 
