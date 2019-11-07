@@ -33,19 +33,18 @@ class App extends Component {
     })
       .then(res => {
           this.setState({countries : res.data, isLoaded:true});
+          if(!this.props.selectedCountry){
+          let country = window.location.href.split("/")[3];
+          axios({
+              method: 'get',
+              url: `https://restcountries.eu/rest/v2/name/${country}`
+          }).then( res => {
+              this.setState({selectedCountry : res.data[0]});
+          });
+    }
     });
 
-    if(!this.props.selectedCountry){
-      let country = window.location.href.split("/")[3];
-      console.log(country);
-      axios({
-          method: 'get',
-          url: `https://restcountries.eu/rest/v2/name/${country}`
-      }).then( res => {
-          console.log(res.data[0]);
-          this.setState({selectedCountry : res.data[0]});
-      });
-}
+        
   }
 
 
