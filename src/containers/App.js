@@ -4,11 +4,16 @@ import {
   Switch, 
   Route
 } from 'react-router-dom';
+import {connect} from 'react-redux';
 import * as axios from 'axios';
 import Header from './Header';
 import Home from './Home';
 import './style/App.css';
 import CountryDetails from './CountryDetails';
+import {
+  setSearchField,
+  setFilteredRegion
+} from '../actions/actions';
 
 class App extends Component {
   constructor(props) {
@@ -21,8 +26,6 @@ class App extends Component {
       currentPage: 1,
       countryPerPage: 24,
       selectedCountry: {},
-      searchField:'',
-      filteredRegion: ''
     };
   }
 
@@ -42,9 +45,7 @@ class App extends Component {
               this.setState({selectedCountry : res.data[0]});
           });
     }
-    });
-
-        
+    });      
   }
 
 
@@ -52,26 +53,18 @@ class App extends Component {
     this.setState({currentPage:number});
   };
 
-  setCountry = (e) => {
-    this.setState({searchField: e.target.value});
-  };
-
-  filterRegion = (e) => {
-    this.setState({filteredRegion: e.target.id});
-  };
-
   selectCountry = (e) => {
     this.setState({selectedCountry: e});
   };
   
-
-
-
-
   render() {
-    const {countries, currentPage, countryPerPage, searchField, filteredRegion, isDark, selectedCountry} = this.state;
+    const {countries, currentPage, countryPerPage, isDark, selectedCountry} = this.state;
+    const {searchField, setCountry, filteredRegion, filterRegion} = this.props;
+
+
     const indexOfLastCountry = currentPage * countryPerPage;
     const indexOfFirstCountry = indexOfLastCountry - countryPerPage;
+
     const getCurrentCountry = countries.filter(
       country =>{
                    
@@ -84,8 +77,6 @@ class App extends Component {
 
     
     const paginate = (pageNumber) => this.setCurrentPage(pageNumber);
-    const searchCountry = (e) => this.setCountry(e);
-    const searchRegion = (e) => this.filterRegion(e);
     const clickCountry = (e) => this.selectCountry(e);
 
     const setToDarkMod = () => {
@@ -110,8 +101,8 @@ class App extends Component {
                   getCurrentCountries={getCurrentCountries} 
                   paginate={paginate}
                   countries={countries}
-                  searchCountry={searchCountry} 
-                  searchRegion={searchRegion} 
+                  searchCountry={setCountry} 
+                  searchRegion={filterRegion} 
                   clickCountry={clickCountry}
                   sear
                   />
@@ -126,4 +117,19 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    searchField : state.setCountry.searchField,
+    filteredRegion: state.setRegion.filteredRegion
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setCountry : event => dispatch(setSearchField(event.target.value)),
+    filterRegion : event => dispatch(setFilteredRegion(event.target.id))
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
