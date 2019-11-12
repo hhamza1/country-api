@@ -8,7 +8,10 @@ import {
 
 const initialState = {
     searchField : '',
-    filteredRegion : ''
+    filteredRegion : '',
+    isPending: false,
+    countries: [],
+    error: ''
 }
 
 export const setCountry = (state=initialState, action={}) => {
