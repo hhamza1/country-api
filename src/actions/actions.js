@@ -4,20 +4,21 @@ import {
     REQUEST_COUNTRIES_PENDING,
     REQUEST_COUNTRIES_SUCCESS,
     REQUEST_COUNTRIES_FAIL,
-    SELECT_COUNTRY
+    SELECT_COUNTRY,
+    CHANGE_THEME
 
 } from '../constants/index';
 
 import * as axios from 'axios';
 
-export const  setSearchField = (text) =>({
+export const  setSearchField = (searchInput) =>({
     type: CHANGE_SEARCH_FIELD,
-    payload: text
+    payload: searchInput
 });
 
-export const setFilteredRegion = (text) => ({
+export const setFilteredRegion = (filter) => ({
     type: SELECT_REGION,
-    payload: text
+    payload: filter
 });
 
 export  const requestCountries = () =>  dispatch => {
@@ -31,4 +32,10 @@ export  const requestCountries = () =>  dispatch => {
 export const selectCountry = (country) => ({
     type: SELECT_COUNTRY,
     payload: country
+});
+
+
+export const changeTheme = (bool) => ({
+    type: CHANGE_THEME,
+    payload: bool   
 });
