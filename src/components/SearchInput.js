@@ -5,7 +5,7 @@ import './styles/SearchInput.css';
 const SearchInput = ({searchCountry, darkMod}) => {
     return (
         <div className="input-group">
-            <label for="countrySearch"></label>
+            <label htmlFor="countrySearch"></label>
             <input
             aria-label="Search for country"
             title="Search for country"
