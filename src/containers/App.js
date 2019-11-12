@@ -14,14 +14,14 @@ import {
   setSearchField,
   setFilteredRegion,
   requestCountries,
-  selectCountry
+  selectCountry,
+  changeTheme
 } from '../actions/actions';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isDark: false,
       hidePagination: false,
       currentPage: 1,
       countryPerPage: 24,
@@ -41,39 +41,22 @@ class App extends Component {
     }
   }     
   
-
-
   setCurrentPage = (number) => {
     this.setState({currentPage:number});
   };
-
-  selectCountry = (e) => {
-    this.setState({selectedCountry: e});
-  };
   
-  render() {
+  render(){
     
-    const {currentPage, countryPerPage, isDark} = this.state;
-    const {searchField, setCountry, filteredRegion, filterRegion, countries, selectedCountry, onSelectCountry} = this.props;
+    const {currentPage, countryPerPage} = this.state;
+    const {searchField, setCountry, filteredRegion, filterRegion, countries, selectedCountry, onSelectCountry, isDark, onChangeTheme} = this.props;
 
     const indexOfLastCountry = currentPage * countryPerPage;
     const indexOfFirstCountry = indexOfLastCountry - countryPerPage;
 
     
     const paginate = (pageNumber) => this.setCurrentPage(pageNumber);
-
-    const setToDarkMod = () => {
-      if(isDark === false){
-        this.setState({isDark : true});
-      }
-      else {
-        this.setState({isDark : false});
-      }
-    };
-    console.log(countries);
     const getCurrentCountry = countries.filter(
       country =>{ 
-            console.log(countries);
             return country.name.toLowerCase().includes(searchField.toLowerCase()) && country.region.toLowerCase().includes(filteredRegion.toLowerCase());;
       }
     );
@@ -82,7 +65,7 @@ class App extends Component {
 
     return (
       <div className={isDark === false ? 'App' : 'darkMod'}>
-        <Header darkMod={isDark} setToDarkMod={setToDarkMod}/>
+        <Header darkMod={isDark} setToDarkMod={onChangeTheme}/>
         <Router>
           <Switch>
             <Route exact path="/">
@@ -115,7 +98,8 @@ const mapStateToProps = state => {
     countries: state.requestCountries.countries,
     isPending: state.requestCountries.isPending,
     error: state.requestCountries.error,
-    selectedCountry: state.selectCountry.selectedCountry
+    selectedCountry: state.selectCountry.selectedCountry,
+    isDark: state.changeTheme.isDark
   }
 }
 
@@ -124,7 +108,8 @@ const mapDispatchToProps = dispatch => {
     setCountry : event => dispatch(setSearchField(event.target.value)),
     filterRegion : event => dispatch(setFilteredRegion(event.target.id)),
     onRequestCountries: () => dispatch(requestCountries()),
-    onSelectCountry: event => dispatch(selectCountry(event))
+    onSelectCountry: event => dispatch(selectCountry(event)),
+    onChangeTheme: () => dispatch(changeTheme())
   }
 }
 
