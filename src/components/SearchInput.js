@@ -11,7 +11,7 @@ const SearchInput = ({searchCountry, darkMod}) => {
             title="Search for country"
             className={darkMod === false ? "search-input" : "search-input search-input__dark"}
             type="text" 
-            name="countrySearch" 
+            id="countrySearch" 
             placeholder="Search for a country"
             onChange={searchCountry}
             >
