@@ -4,7 +4,8 @@ import {
     REQUEST_COUNTRIES_PENDING,
     REQUEST_COUNTRIES_SUCCESS,
     REQUEST_COUNTRIES_FAIL,
-    SELECT_COUNTRY
+    SELECT_COUNTRY,
+    CHANGE_THEME
 } from '../constants/index';
 
 const initialState = {
@@ -13,7 +14,8 @@ const initialState = {
     isPending: false,
     countries: [],
     selectedCountry:{},
-    error: ''
+    error: '',
+    isDark: false
 }
 
 export const setCountry = (state=initialState, action={}) => {
@@ -52,6 +54,20 @@ export const selectCountry = (state=initialState, action={}) => {
     switch(action.type) {
         case SELECT_COUNTRY:
             return Object.assign({}, state, { selectedCountry : action.payload});
+        default:
+            return state;
+    }
+}
+
+export const changeTheme = (state=initialState, action={}) => {
+    switch(action.type) {
+        case CHANGE_THEME:
+            if(state.isDark === false) {
+                return Object.assign({}, state, {isDark:true});
+            }
+            else {
+                return Object.assign({}, state, {isDark: false});
+            }
         default:
             return state;
     }
