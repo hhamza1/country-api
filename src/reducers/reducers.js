@@ -3,7 +3,8 @@ import {
     SELECT_REGION,
     REQUEST_COUNTRIES_PENDING,
     REQUEST_COUNTRIES_SUCCESS,
-    REQUEST_COUNTRIES_FAIL
+    REQUEST_COUNTRIES_FAIL,
+    SELECT_COUNTRY
 } from '../constants/index';
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
     filteredRegion : '',
     isPending: false,
     countries: [],
+    selectedCountry:{},
     error: ''
 }
 
@@ -41,6 +43,15 @@ export const requestCountries = (state=initialState, action={}) => {
             return Object.assign({}, state, {countries : action.payload, isPending: false});
         case REQUEST_COUNTRIES_FAIL:
             return Object.assign({}, state, {error: action.payload, isPending: false});
+        default:
+            return state;
+    }
+}
+
+export const selectCountry = (state=initialState, action={}) => {
+    switch(action.type) {
+        case SELECT_COUNTRY:
+            return Object.assign({}, state, { selectedCountry : action.payload});
         default:
             return state;
     }

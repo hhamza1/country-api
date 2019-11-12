@@ -3,7 +3,8 @@ import {
     SELECT_REGION,
     REQUEST_COUNTRIES_PENDING,
     REQUEST_COUNTRIES_SUCCESS,
-    REQUEST_COUNTRIES_FAIL
+    REQUEST_COUNTRIES_FAIL,
+    SELECT_COUNTRY
 
 } from '../constants/index';
 
@@ -25,3 +26,9 @@ export  const requestCountries = () =>  dispatch => {
         .then(res => dispatch({type: REQUEST_COUNTRIES_SUCCESS, payload: res.data}))
         .catch((error) => dispatch({type: REQUEST_COUNTRIES_FAIL, payload: error}));
 }
+
+
+export const selectCountry = (country) => ({
+    type: SELECT_COUNTRY,
+    payload: country
+});

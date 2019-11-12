@@ -13,7 +13,8 @@ import CountryDetails from './CountryDetails';
 import {
   setSearchField,
   setFilteredRegion,
-  requestCountries
+  requestCountries,
+  selectCountry
 } from '../actions/actions';
 
 class App extends Component {
@@ -24,7 +25,6 @@ class App extends Component {
       hidePagination: false,
       currentPage: 1,
       countryPerPage: 24,
-      selectedCountry: {},
     };
   }
 
@@ -53,15 +53,14 @@ class App extends Component {
   
   render() {
     
-    const {currentPage, countryPerPage, isDark, selectedCountry} = this.state;
-    const {searchField, setCountry, filteredRegion, filterRegion, countries} = this.props;
+    const {currentPage, countryPerPage, isDark} = this.state;
+    const {searchField, setCountry, filteredRegion, filterRegion, countries, selectedCountry, onSelectCountry} = this.props;
 
     const indexOfLastCountry = currentPage * countryPerPage;
     const indexOfFirstCountry = indexOfLastCountry - countryPerPage;
 
     
     const paginate = (pageNumber) => this.setCurrentPage(pageNumber);
-    const clickCountry = (e) => this.selectCountry(e);
 
     const setToDarkMod = () => {
       if(isDark === false){
@@ -96,8 +95,7 @@ class App extends Component {
                   countries={countries}
                   searchCountry={setCountry} 
                   searchRegion={filterRegion} 
-                  clickCountry={clickCountry}
-                  sear
+                  clickCountry={onSelectCountry}
                   />
             </Route>
             <Route exact path={`/${selectedCountry.alpha3Code}`}>
@@ -116,7 +114,8 @@ const mapStateToProps = state => {
     filteredRegion: state.setRegion.filteredRegion,
     countries: state.requestCountries.countries,
     isPending: state.requestCountries.isPending,
-    error: state.requestCountries.error
+    error: state.requestCountries.error,
+    selectedCountry: state.selectCountry.selectedCountry
   }
 }
 
@@ -124,7 +123,8 @@ const mapDispatchToProps = dispatch => {
   return {
     setCountry : event => dispatch(setSearchField(event.target.value)),
     filterRegion : event => dispatch(setFilteredRegion(event.target.id)),
-    onRequestCountries: () => dispatch(requestCountries())
+    onRequestCountries: () => dispatch(requestCountries()),
+    onSelectCountry: event => dispatch(selectCountry(event))
   }
 }
 
