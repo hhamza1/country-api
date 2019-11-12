@@ -1,14 +1,16 @@
 import React  from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
-import {createStore, combineReducers} from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
 import './index.css';
 import App from './containers/App';
-import {setCountry, setRegion} from './reducers/reducers';
+import {setCountry, setRegion, requestCountries} from './reducers/reducers';
 
 
-const rootReducer = combineReducers({setCountry, setRegion});
-const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const rootReducer = combineReducers({setCountry, setRegion, requestCountries});
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
 
 render(
     <Provider store={store}>
