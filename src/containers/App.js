@@ -12,15 +12,14 @@ import './style/App.css';
 import CountryDetails from './CountryDetails';
 import {
   setSearchField,
-  setFilteredRegion
+  setFilteredRegion,
+  requestCountries
 } from '../actions/actions';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      countries: [],
-      isLoaded: false,
       isDark: false,
       hidePagination: false,
       currentPage: 1,
@@ -30,23 +29,18 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios({
-      method: 'get',
-      url: 'https://restcountries.eu/rest/v2/all'
-    })
-      .then(res => {
-          this.setState({countries : res.data, isLoaded:true});
-          if(!this.props.selectedCountry){
-          let country = window.location.href.split("/")[3];
-          axios({
-              method: 'get',
-              url: `https://restcountries.eu/rest/v2/name/${country}`
-          }).then( res => {
-              this.setState({selectedCountry : res.data[0]});
-          });
+    this.props.onRequestCountries();
+    if(!this.props.selectedCountry){
+      let country = window.location.href.split("/")[3];
+      axios({
+          method: 'get',
+          url: `https://restcountries.eu/rest/v2/name/${country}`
+      }).then( res => {
+          this.setState({selectedCountry : res.data[0]});
+      }); 
     }
-    });      
-  }
+  }     
+  
 
 
   setCurrentPage = (number) => {
@@ -58,22 +52,12 @@ class App extends Component {
   };
   
   render() {
-    const {countries, currentPage, countryPerPage, isDark, selectedCountry} = this.state;
-    const {searchField, setCountry, filteredRegion, filterRegion} = this.props;
-
+    
+    const {currentPage, countryPerPage, isDark, selectedCountry} = this.state;
+    const {searchField, setCountry, filteredRegion, filterRegion, countries} = this.props;
 
     const indexOfLastCountry = currentPage * countryPerPage;
     const indexOfFirstCountry = indexOfLastCountry - countryPerPage;
-
-    const getCurrentCountry = countries.filter(
-      country =>{
-                   
-            return country.name.toLowerCase().includes(searchField.toLowerCase()) && country.region.toLowerCase().includes(filteredRegion.toLowerCase());;
-      }
-    );
-
-    const getCurrentCountries = getCurrentCountry.slice(indexOfFirstCountry, indexOfLastCountry);
-
 
     
     const paginate = (pageNumber) => this.setCurrentPage(pageNumber);
@@ -87,6 +71,15 @@ class App extends Component {
         this.setState({isDark : false});
       }
     };
+    console.log(countries);
+    const getCurrentCountry = countries.filter(
+      country =>{ 
+            console.log(countries);
+            return country.name.toLowerCase().includes(searchField.toLowerCase()) && country.region.toLowerCase().includes(filteredRegion.toLowerCase());;
+      }
+    );
+
+    const getCurrentCountries = getCurrentCountry.slice(indexOfFirstCountry, indexOfLastCountry);
 
     return (
       <div className={isDark === false ? 'App' : 'darkMod'}>
@@ -120,14 +113,18 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     searchField : state.setCountry.searchField,
-    filteredRegion: state.setRegion.filteredRegion
+    filteredRegion: state.setRegion.filteredRegion,
+    countries: state.requestCountries.countries,
+    isPending: state.requestCountries.isPending,
+    error: state.requestCountries.error
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     setCountry : event => dispatch(setSearchField(event.target.value)),
-    filterRegion : event => dispatch(setFilteredRegion(event.target.id))
+    filterRegion : event => dispatch(setFilteredRegion(event.target.id)),
+    onRequestCountries: () => dispatch(requestCountries())
   }
 }
 
