@@ -19,12 +19,9 @@ export const setFilteredRegion = (text) => ({
     payload: text
 });
 
-export const requestCountries = dispatch => {
-    dispatch({type: REQUEST_COUNTRIES_PENDING});
-    axios({
-        method: 'get',
-        url: 'https://restcountries.eu/rest/v2/all'
-      })
-        .then(res => dispatch({type: REQUEST_COUNTRIES_SUCCESS, payload: res}))
-        .catch(error => dispatch({type: REQUEST_COUNTRIES_FAIL, payload: error}));
+export  const requestCountries = () =>  dispatch => {
+     dispatch({type: REQUEST_COUNTRIES_PENDING});
+     axios({method:'get', url:'https://restcountries.eu/rest/v2/all'})
+        .then(res => dispatch({type: REQUEST_COUNTRIES_SUCCESS, payload: res.data}))
+        .catch((error) => dispatch({type: REQUEST_COUNTRIES_FAIL, payload: error}));
 }
