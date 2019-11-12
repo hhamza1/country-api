@@ -100,7 +100,7 @@ class App extends Component {
                   sear
                   />
             </Route>
-            <Route exact path={`/${selectedCountry.name}`}>
+            <Route exact path={`/${selectedCountry.alpha3Code}`}>
                 <CountryDetails isDark={isDark} selectedCountry={selectedCountry} />
             </Route>
           </Switch>

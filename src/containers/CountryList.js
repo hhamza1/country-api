@@ -12,7 +12,7 @@ const CountryList = ({countries, darkMod, selectedCountry}) => {
                 {
                     countries.map((country, key) => {
                         return(
-                                <Link key={key} style={{ textDecoration: 'none' }}  to={`/${country.name}`}>
+                                <Link key={key} style={{ textDecoration: 'none' }}  to={`/${country.alpha3Code}`}>
                                     <Country
                                         country={country}
                                         name={country.name} 
