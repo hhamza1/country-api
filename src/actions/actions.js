@@ -5,7 +5,10 @@ import {
     REQUEST_COUNTRIES_SUCCESS,
     REQUEST_COUNTRIES_FAIL,
     SELECT_COUNTRY,
-    CHANGE_THEME
+    CHANGE_THEME,
+    REQUEST_COUNTRY_PENDING,
+    REQUEST_COUNTRY_SUCCESS,
+    REQUEST_COUNTRY_FAIL,
 
 } from '../constants/index';
 
@@ -25,7 +28,7 @@ export  const requestCountries = () =>  dispatch => {
      dispatch({type: REQUEST_COUNTRIES_PENDING});
      axios({method:'get', url:'https://restcountries.eu/rest/v2/all'})
         .then(res => dispatch({type: REQUEST_COUNTRIES_SUCCESS, payload: res.data}))
-        .catch((error) => dispatch({type: REQUEST_COUNTRIES_FAIL, payload: error}));
+        .catch(error => dispatch({type: REQUEST_COUNTRIES_FAIL, payload: error}));
 }
 
 
@@ -39,3 +42,11 @@ export const changeTheme = (bool) => ({
     type: CHANGE_THEME,
     payload: bool   
 });
+
+export const requestCountry = () => dispatch => {
+    dispatch({type: REQUEST_COUNTRY_PENDING});
+    let countryCode = window.location.href.split("/")[3];
+    axios({method: 'get', url: `https://restcountries.eu/rest/v2/name/${countryCode}`})
+    .then(res => dispatch({type: REQUEST_COUNTRY_SUCCESS, payload: res.data[0]}))
+    .catch(error => dispatch({type: REQUEST_COUNTRY_FAIL, payload: error}));
+}
