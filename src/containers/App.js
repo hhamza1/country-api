@@ -5,7 +5,6 @@ import {
   Route
 } from 'react-router-dom';
 import {connect} from 'react-redux';
-import * as axios from 'axios';
 import Header from './Header';
 import Home from './Home';
 import './style/App.css';
@@ -15,7 +14,8 @@ import {
   setFilteredRegion,
   requestCountries,
   selectCountry,
-  changeTheme
+  changeTheme,
+  requestCountry
 } from '../actions/actions';
 
 class App extends Component {
@@ -30,25 +30,29 @@ class App extends Component {
 
   componentDidMount() {
     this.props.onRequestCountries();
-    if(!this.props.selectedCountry){
-      let country = window.location.href.split("/")[3];
-      axios({
-          method: 'get',
-          url: `https://restcountries.eu/rest/v2/name/${country}`
-      }).then( res => {
-          this.setState({selectedCountry : res.data[0]});
-      }); 
-    }
-  }     
-  
+    this.props.onRequestCountry();
+  }
+
   setCurrentPage = (number) => {
     this.setState({currentPage:number});
   };
+
+
   
   render(){
-    
     const {currentPage, countryPerPage} = this.state;
-    const {searchField, setCountry, filteredRegion, filterRegion, countries, selectedCountry, onSelectCountry, isDark, onChangeTheme} = this.props;
+    const {
+      searchField, 
+      setCountry, 
+      filteredRegion, 
+      filterRegion, 
+      countries, 
+      selectedCountry, 
+      onSelectCountry, 
+      isDark, 
+      onChangeTheme,
+      requestedCountry
+  } = this.props;
 
     const indexOfLastCountry = currentPage * countryPerPage;
     const indexOfFirstCountry = indexOfLastCountry - countryPerPage;
@@ -62,7 +66,6 @@ class App extends Component {
     );
 
     const getCurrentCountries = getCurrentCountry.slice(indexOfFirstCountry, indexOfLastCountry);
-
     return (
       <div className={isDark === false ? 'App' : 'darkMod'}>
         <Header darkMod={isDark} setToDarkMod={onChangeTheme}/>
@@ -82,7 +85,7 @@ class App extends Component {
                   />
             </Route>
             <Route exact path={`/${selectedCountry.alpha3Code}`}>
-                <CountryDetails isDark={isDark} selectedCountry={selectedCountry} />
+                <CountryDetails isDark={isDark} selectedCountry={selectedCountry}/>
             </Route>
           </Switch>
         </Router>
@@ -99,6 +102,7 @@ const mapStateToProps = state => {
     isPending: state.requestCountries.isPending,
     error: state.requestCountries.error,
     selectedCountry: state.selectCountry.selectedCountry,
+    requestedCountry: state.requestCountry.requestedCountry,
     isDark: state.changeTheme.isDark
   }
 }
@@ -109,7 +113,8 @@ const mapDispatchToProps = dispatch => {
     filterRegion : event => dispatch(setFilteredRegion(event.target.id)),
     onRequestCountries: () => dispatch(requestCountries()),
     onSelectCountry: event => dispatch(selectCountry(event)),
-    onChangeTheme: () => dispatch(changeTheme())
+    onRequestCountry: () => dispatch(requestCountry()),
+    onChangeTheme: () => dispatch(changeTheme()),
   }
 }
 
