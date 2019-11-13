@@ -5,17 +5,14 @@ import {
     REQUEST_COUNTRIES_SUCCESS,
     REQUEST_COUNTRIES_FAIL,
     SELECT_COUNTRY,
-    CHANGE_THEME
+    CHANGE_THEME,
+    REQUEST_COUNTRY_PENDING,
+    REQUEST_COUNTRY_SUCCESS,
+    REQUEST_COUNTRY_FAIL
 } from '../constants/index';
 
 const initialState = {
     searchField : '',
-    filteredRegion : '',
-    isPending: false,
-    countries: [],
-    selectedCountry:{},
-    error: '',
-    isDark: false
 }
 
 export const setCountry = (state=initialState, action={}) => {
@@ -27,7 +24,11 @@ export const setCountry = (state=initialState, action={}) => {
     }
 }
 
-export const setRegion = (state=initialState, action={}) => {
+const initialStateRegion = {
+    filteredRegion : '',
+}
+
+export const setRegion = (state=initialStateRegion, action={}) => {
     switch(action.type) {
         case SELECT_REGION:
             return Object.assign({}, state, {filteredRegion: action.payload});
@@ -36,8 +37,14 @@ export const setRegion = (state=initialState, action={}) => {
     }
 }
 
+const initialStateRequests = {
+    isPending: false,
+    countries: [],
+    error: '',
 
-export const requestCountries = (state=initialState, action={}) => {
+}
+
+export const requestCountries = (state=initialStateRequests, action={}) => {
     switch(action.type) {
         case REQUEST_COUNTRIES_PENDING:
             return Object.assign({}, state, {isPending: true});
@@ -50,7 +57,12 @@ export const requestCountries = (state=initialState, action={}) => {
     }
 }
 
-export const selectCountry = (state=initialState, action={}) => {
+export const initialStateSelect = {
+    selectedCountry: {},
+}
+
+
+export const selectCountry = (state=initialStateSelect, action={}) => {
     switch(action.type) {
         case SELECT_COUNTRY:
             return Object.assign({}, state, { selectedCountry : action.payload});
@@ -59,7 +71,11 @@ export const selectCountry = (state=initialState, action={}) => {
     }
 }
 
-export const changeTheme = (state=initialState, action={}) => {
+export const initialStateTheme = {
+    isDark: false
+}
+
+export const changeTheme = (state=initialStateTheme, action={}) => {
     switch(action.type) {
         case CHANGE_THEME:
             if(state.isDark === false) {
@@ -70,5 +86,24 @@ export const changeTheme = (state=initialState, action={}) => {
             }
         default:
             return state;
+    }
+}
+
+const initialStateRequest = {
+    requestedCountry: {},
+    isLoading: false,
+    selectedError: '',
+}
+
+export const requestCountry = (state=initialStateRequest, action={}) => {
+    switch(action.type){
+        case REQUEST_COUNTRY_PENDING:
+            return Object.assign({}, state, {isLoading: true});
+        case REQUEST_COUNTRY_SUCCESS:
+            return Object.assign({}, state, {requestedCountry: action.payload, isLoading: false});
+        case REQUEST_COUNTRY_FAIL:
+            return Object.assign({}, state, {selectedError: action.payload, isLoading:false});
+        default:
+            return state;        
     }
 }
