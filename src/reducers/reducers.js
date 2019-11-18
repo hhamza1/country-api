@@ -57,19 +57,7 @@ export const requestCountries = (state=initialStateRequests, action={}) => {
     }
 }
 
-export const initialStateSelect = {
-    selectedCountry: {},
-}
 
-
-export const selectCountry = (state=initialStateSelect, action={}) => {
-    switch(action.type) {
-        case SELECT_COUNTRY:
-            return Object.assign({}, state, { selectedCountry : action.payload});
-        default:
-            return state;
-    }
-}
 
 export const initialStateTheme = {
     isDark: false
@@ -89,18 +77,29 @@ export const changeTheme = (state=initialStateTheme, action={}) => {
     }
 }
 
-const initialStateRequest = {
-    requestedCountry: {},
+export const initialStateSelect = {
+    selectedCountry: {},
     isLoading: false,
     selectedError: '',
 }
 
-export const requestCountry = (state=initialStateRequest, action={}) => {
+
+export const selectCountry = (state=initialStateSelect, action={}) => {
+    switch(action.type) {
+        
+        default:
+            return state;
+    }
+}
+
+export const requestCountry = (state=initialStateSelect, action={}) => {
     switch(action.type){
+        case SELECT_COUNTRY:
+            return Object.assign({}, state, {selectedCountry : action.payload});
         case REQUEST_COUNTRY_PENDING:
             return Object.assign({}, state, {isLoading: true});
         case REQUEST_COUNTRY_SUCCESS:
-            return Object.assign({}, state, {requestedCountry: action.payload, isLoading: false});
+            return Object.assign({}, state, {selectedCountry: action.payload, isLoading: false});
         case REQUEST_COUNTRY_FAIL:
             return Object.assign({}, state, {selectedError: action.payload, isLoading:false});
         default:

@@ -50,8 +50,7 @@ class App extends Component {
       selectedCountry, 
       onSelectCountry, 
       isDark, 
-      onChangeTheme,
-      requestedCountry
+      onChangeTheme
   } = this.props;
 
     const indexOfLastCountry = currentPage * countryPerPage;
@@ -101,8 +100,7 @@ const mapStateToProps = state => {
     countries: state.requestCountries.countries,
     isPending: state.requestCountries.isPending,
     error: state.requestCountries.error,
-    selectedCountry: state.selectCountry.selectedCountry,
-    requestedCountry: state.requestCountry.requestedCountry,
+    selectedCountry: state.requestCountry.selectedCountry,
     isDark: state.changeTheme.isDark
   }
 }
