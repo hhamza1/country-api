@@ -50,7 +50,11 @@ class App extends Component {
       selectedCountry, 
       onSelectCountry, 
       isDark, 
+<<<<<<< HEAD
       onChangeTheme,
+=======
+      onChangeTheme
+>>>>>>> 23f2d3bf7e5f88654d9e9090bb7c960fe69883e6
   } = this.props;
 
     const indexOfLastCountry = currentPage * countryPerPage;

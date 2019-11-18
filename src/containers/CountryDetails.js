@@ -4,6 +4,7 @@ import './style/CountryDetails.css';
 
 
 const CountryDetails = ({isDark, selectedCountry}) => {
+        console.log(selectedCountry);
         return(
             <div className="selected-country-details">
                 <Link className={isDark === false ? "back-button" : "back-button dark-mod"} to={`/`}>
