@@ -80,12 +80,8 @@ export const changeTheme = (state=initialStateTheme, action={}) => {
     }
 }
 
-<<<<<<< HEAD
-const initialStateRequest = {
-=======
 export const initialStateSelect = {
     selectedCountry: {},
->>>>>>> 23f2d3bf7e5f88654d9e9090bb7c960fe69883e6
     isLoading: false,
     selectedError: '',
     selectedCountry: {},
@@ -103,11 +99,7 @@ export const selectCountry = (state=initialStateSelect, action={}) => {
 export const requestCountry = (state=initialStateSelect, action={}) => {
     switch(action.type){
         case SELECT_COUNTRY:
-<<<<<<< HEAD
-            return Object.assign({}, state, { selectedCountry: action.payload })
-=======
             return Object.assign({}, state, {selectedCountry : action.payload});
->>>>>>> 23f2d3bf7e5f88654d9e9090bb7c960fe69883e6
         case REQUEST_COUNTRY_PENDING:
             return Object.assign({}, state, {isLoading: true});
         case REQUEST_COUNTRY_SUCCESS:
