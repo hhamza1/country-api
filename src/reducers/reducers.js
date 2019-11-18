@@ -81,16 +81,6 @@ export const initialStateSelect = {
     selectedCountry: {},
     isLoading: false,
     selectedError: '',
-    selectedCountry: {},
-}
-
-
-export const selectCountry = (state=initialStateSelect, action={}) => {
-    switch(action.type) {
-        
-        default:
-            return state;
-    }
 }
 
 export const requestCountry = (state=initialStateSelect, action={}) => {
