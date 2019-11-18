@@ -13,9 +13,9 @@ import {
   setSearchField,
   setFilteredRegion,
   requestCountries,
-  selectCountry,
   changeTheme,
-  requestCountry
+  requestCountry,
+  selectCountry
 } from '../actions/actions';
 
 class App extends Component {
@@ -51,7 +51,6 @@ class App extends Component {
       onSelectCountry, 
       isDark, 
       onChangeTheme,
-      requestedCountry
   } = this.props;
 
     const indexOfLastCountry = currentPage * countryPerPage;
@@ -84,7 +83,7 @@ class App extends Component {
                   clickCountry={onSelectCountry}
                   />
             </Route>
-            <Route exact path={`/${selectedCountry.alpha3Code}`}>
+            <Route exact path={`/${selectedCountry.alpha2Code}`}>
                 <CountryDetails isDark={isDark} selectedCountry={selectedCountry}/>
             </Route>
           </Switch>
@@ -101,8 +100,7 @@ const mapStateToProps = state => {
     countries: state.requestCountries.countries,
     isPending: state.requestCountries.isPending,
     error: state.requestCountries.error,
-    selectedCountry: state.selectCountry.selectedCountry,
-    requestedCountry: state.requestCountry.requestedCountry,
+    selectedCountry: state.requestCountry.selectedCountry,
     isDark: state.changeTheme.isDark
   }
 }
@@ -112,7 +110,7 @@ const mapDispatchToProps = dispatch => {
     setCountry : event => dispatch(setSearchField(event.target.value)),
     filterRegion : event => dispatch(setFilteredRegion(event.target.id)),
     onRequestCountries: () => dispatch(requestCountries()),
-    onSelectCountry: event => dispatch(selectCountry(event)),
+    onSelectCountry: (event) => dispatch(selectCountry(event)),
     onRequestCountry: () => dispatch(requestCountry()),
     onChangeTheme: () => dispatch(changeTheme()),
   }

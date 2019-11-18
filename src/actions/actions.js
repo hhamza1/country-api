@@ -31,17 +31,16 @@ export  const requestCountries = () =>  dispatch => {
         .catch(error => dispatch({type: REQUEST_COUNTRIES_FAIL, payload: error}));
 }
 
+export const changeTheme = (bool) => ({
+    type: CHANGE_THEME,
+    payload: bool   
+});
 
 export const selectCountry = (country) => ({
     type: SELECT_COUNTRY,
     payload: country
 });
 
-
-export const changeTheme = (bool) => ({
-    type: CHANGE_THEME,
-    payload: bool   
-});
 
 export const requestCountry = () => dispatch => {
     dispatch({type: REQUEST_COUNTRY_PENDING});
