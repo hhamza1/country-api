@@ -57,11 +57,8 @@ export const requestCountries = (state=initialStateRequests, action={}) => {
     }
 }
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 23f2d3bf7e5f88654d9e9090bb7c960fe69883e6
 export const initialStateTheme = {
     isDark: false
 }
