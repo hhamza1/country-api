@@ -1,5 +1,5 @@
 import React from 'react';
-import 'linearicons';
+//import 'linearicons';
 import './styles/SwitchButton.css';
 
 

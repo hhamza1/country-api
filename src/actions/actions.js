@@ -26,7 +26,7 @@ export const setFilteredRegion = (filter) => ({
 
 export  const requestCountries = () =>  dispatch => {
      dispatch({type: REQUEST_COUNTRIES_PENDING});
-     axios({method:'get', url:'https://restcountries.eu/rest/v2/all'})
+     fetch('https://restcountries.com/v3.1/all')
         .then(res => dispatch({type: REQUEST_COUNTRIES_SUCCESS, payload: res.data}))
         .catch(error => dispatch({type: REQUEST_COUNTRIES_FAIL, payload: error}));
 }

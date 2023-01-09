@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { 
   BrowserRouter as Router, 
-  Switch, 
+  Routes, 
   Route
 } from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -69,9 +69,9 @@ class App extends Component {
       <div className={isDark === false ? 'App' : 'darkMod'}>
         <Header darkMod={isDark} setToDarkMod={onChangeTheme}/>
         <Router>
-          <Switch>
-            <Route exact path="/">
-                <Home
+          <Routes>
+          <Route exact path="/" Component ="Home" >
+                {/*<Home
                   isDark={isDark}
                   filteredRegion={filteredRegion}
                   countryPerPage={countryPerPage}
@@ -81,12 +81,12 @@ class App extends Component {
                   searchCountry={setCountry} 
                   searchRegion={filterRegion} 
                   clickCountry={onSelectCountry}
-                  />
+    />*/}
             </Route>
             <Route exact path={`/${selectedCountry.alpha2Code}`}>
-                <CountryDetails isDark={isDark} selectedCountry={selectedCountry}/>
+                {/*<CountryDetails isDark={isDark} selectedCountry={selectedCountry}/>*/}
             </Route>
-          </Switch>
+            </Routes>
         </Router>
       </div>
     );
